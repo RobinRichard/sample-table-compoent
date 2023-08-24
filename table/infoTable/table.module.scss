@@ -1,0 +1,155 @@
+@import "~shared/styles/mixins";
+
+.table {
+  td,
+  th {
+    padding: 0.32em !important;
+    vertical-align: middle;
+
+    @media print {
+      @if $pdf-condensed-table {
+        padding: 2px !important;
+      }
+    }
+
+    &.indent {
+      padding-left: 10px !important;
+    }
+
+    .collapsible {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  th {
+    min-width: 60px;
+    @media print {
+      min-width: unset;
+    }
+  }
+
+  .empty {
+    text-align: center !important;
+    position: relative;
+
+    .split {
+      background: $background-colour;
+      position: absolute;
+      width: 0.5px;
+      top: -1px;
+      bottom: -1px;
+    }
+    &:last-of-type {
+      display: none;
+    }
+  }
+
+  .headRow {
+    background-color: $product-colour;
+    color: $background-colour;
+
+    th,
+    td {
+      font-size: $small-font;
+      padding: 1em 0.4em !important;
+      vertical-align: middle;
+      font-weight: 500 !important;
+      border-top: 1px solid $roman-silver;
+      border-bottom: 1px solid $roman-silver;
+
+      @media print {
+        @if $pdf-condensed-table {
+          padding: 8px 4px !important;
+        }
+      }
+    }
+  }
+
+  .subheadRow {
+    th,
+    td {
+      color: $primary-text-colour !important;
+      font-size: $small-font;
+      font-weight: 500 !important;
+      white-space: nowrap;
+
+      @media print {
+        @if $pdf-condensed-table {
+          font-size: $extra-small-font;
+        }
+      }
+    }
+  }
+
+  .row {
+    td,
+    th {
+      color: $primary-text-colour !important;
+    }
+    &.active {
+      td,
+      th {
+        color: $product-colour !important;
+        font-weight: 500 !important;
+      }
+    }
+    &.highlight {
+      td,
+      th {
+        font-weight: 500 !important;
+      }
+    }
+
+    th {
+      font-size: $small-font;
+      font-weight: 400 !important;
+      white-space: nowrap;
+
+      @media print {
+        white-space: normal;
+        @if $pdf-condensed-table {
+          font-size: $extra-small-font;
+        }
+      }
+
+      @include xl-down {
+        white-space: normal;
+      }
+    }
+
+    td {
+      font-size: $small-font;
+      @media print {
+        @if $pdf-condensed-table {
+          font-size: $extra-small-font;
+        }
+      }
+    }
+  }
+
+  &.rightAligned {
+    td {
+      text-align: right;
+    }
+
+    .headRow {
+      td {
+        text-align: right;
+      }
+    }
+  }
+}
+
+@media print {
+  .table {
+    // To add darker background for table stipes in PDF
+    --bs-table-striped-bg: #e7e7e7;
+
+    td,
+    th {
+      background-color: unset !important;
+    }
+  }
+}
